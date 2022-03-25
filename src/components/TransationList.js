@@ -3,6 +3,7 @@ import { GlobalContext } from "../context/GlobalState";
 import Transaction from "./Transaction";
 
 const TransationList = () => {
+  // extract transaction from ctx
   const { transactions } = useContext(GlobalContext);
 
   return (
