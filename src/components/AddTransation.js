@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
 const AddTransation = () => {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState(0);
+
+  const { addTransaction } = useContext(GlobalContext);
 
   const textChangeHandler = (event) => {
     setText(event.target.value);
   };
 
   const amountChangeHandler = (event) => {
-    setAmount(event.target.value);
+    setAmount(parseInt(event.target.value));
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
+    const newTransaction = {
+      id: Math.floor(Math.random()),
+      text: text,
+      amount: amount,
+    };
+    addTransaction(newTransaction);
+
+    setText("");
+    setAmount("");
   };
   return (
     <>
@@ -22,6 +34,7 @@ const AddTransation = () => {
         <div className="form-control">
           <label htmlFor="text">Text</label>
           <input
+            autoComplete="off"
             value={text}
             type="text"
             id="text"
@@ -35,7 +48,7 @@ const AddTransation = () => {
             (negative - expense, positive - income)
           </label>
           <input
-            value={amount}
+            value={amount.toString()}
             type="number"
             id="amount"
             placeholder="Enter amount..."
