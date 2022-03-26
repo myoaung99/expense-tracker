@@ -2,9 +2,11 @@ import React, { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const AddTransation = () => {
+  // inital state for both input fields
   const [text, setText] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
 
+  // extract add function from ctx
   const { addTransaction } = useContext(GlobalContext);
 
   const textChangeHandler = (event) => {
